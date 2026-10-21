@@ -8,3 +8,7 @@ class HealthResponse(BaseModel):
     service: str
     status: Literal["ok"]
     version: str
+
+
+class DatabaseHealthResponse(BaseModel):
+    database: Literal["connected"]

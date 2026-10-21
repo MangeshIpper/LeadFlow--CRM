@@ -1,0 +1,27 @@
+
+services:
+  identity-db:
+    image: postgres:17
+    container_name: leadflow_identity_db
+
+    environment:
+      POSTGRES_USER: leadflow_identity
+      POSTGRES_PASSWORD: dev_only_change_me
+      POSTGRES_DB: leadflow_identity
+
+    ports:
+      - "127.0.0.1:5433:5432"
+
+    volumes:
+      - identity_db_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U leadflow_identity -d leadflow_identity
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  identity_db_data:
